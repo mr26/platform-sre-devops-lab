@@ -16,3 +16,7 @@ override.tf.json
 
 # Plan files
 *.tfplan
+
+placeholder-bin/
+
+.cursor/
