@@ -1,0 +1,9 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/mr26/platform-sre-devops-lab.git
+    targetRevision: master
+
+applications:
+  - name: atlantis
