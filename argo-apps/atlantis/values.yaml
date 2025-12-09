@@ -1,0 +1,25 @@
+orgAllowlist: "github.com/mr26/*"
+
+github:
+  user: "mr26"
+  token:
+    secretKeyRef:
+      name: atlantis-github
+      key: token
+  secret:
+    secretKeyRef:
+      name: atlantis-github
+      key: webhookSecret
+
+
+service:
+  type: LoadBalancer
+  annotations: {}
+  port: 80
+  portName: atlantis
+  nodePort: null
+  # -- (int) [optional] Define the port you would like atlantis to run on. Defaults to 4141.
+  targetPort: 4141
+  loadBalancerIP: null
+  loadBalancerSourceRanges: []
+  externalTrafficPolicy: null
