@@ -7,3 +7,9 @@ spec:
 
 applications:
   - name: atlantis
+    namespace: atlantis
+    path: argo-apps/atlantis
+    tool:
+      helm:
+        valueFiles:
+          - values.yaml
