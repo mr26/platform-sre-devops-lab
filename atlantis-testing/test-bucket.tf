@@ -19,4 +19,4 @@ resource "aws_s3_bucket" "atlantis_test" {
 
 output "bucket_name" {
   value = aws_s3_bucket.atlantis_test.bucket
-}
+} 
