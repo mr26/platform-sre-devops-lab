@@ -22,6 +22,8 @@ spec:
         # Org Allowlist
         - name: ATLANTIS_REPO_ALLOWLIST
           value: "github.com/mr26/*"
+        - name: ATLANTIS_PORT
+          value: "4141"
 
         # GitHub Config
         - name: ATLANTIS_GH_USER
