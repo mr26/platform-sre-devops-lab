@@ -1,0 +1,15 @@
+project: default
+source:
+  repoURL: git@github.com:mr26/platform-sre-devops-lab.git
+  path: argo-apps
+  targetRevision: master
+destination:
+  server: https://kubernetes.default.svc
+  namespace: argocd
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+    enabled: true
+  syncOptions:
+    - CreateNamespace=true
