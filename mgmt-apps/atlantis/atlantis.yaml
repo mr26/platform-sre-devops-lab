@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: atlantis
-        image: ghcr.io/runatlantis/atlantis:v4.21.0
+        image: ghcr.io/runatlantis/atlantis:latest
         env:
         # Org Allowlist
         - name: ATLANTIS_REPO_ALLOWLIST
