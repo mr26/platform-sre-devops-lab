@@ -67,10 +67,10 @@ kind: Service
 metadata:
   name: atlantis
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - name: atlantis
-    port: 80
-    targetPort: 4141
+    - name: atlantis
+      port: 80
+      targetPort: 4141
   selector:
     app.kubernetes.io/name: atlantis
