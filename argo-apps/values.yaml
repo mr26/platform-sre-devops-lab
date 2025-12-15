@@ -9,3 +9,7 @@ applications:
   - name: atlantis
     namespace: atlantis
     path: argo-apps/atlantis
+  - name: crossplane
+    tool:
+      helm:
+        releaseName: crossplane
