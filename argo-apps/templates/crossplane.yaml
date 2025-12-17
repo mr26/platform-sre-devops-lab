@@ -2,21 +2,24 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: crossplane
-  namespace: crossplane
+  namespace: argocd   # ArgoCD always lives in its own namespace
 spec:
   project: default
+
   source:
-    chart: crossplane
-    repoURL: https://charts.crossplane.io/stable
-    targetRevision: 2.1.3
-    helm:
-      releaseName: crossplane
+    repoURL: https://github.com/mr26/platform-sre-devops-lab.git
+    path: mgmt-apps/crossplane       # path in your repo where manifest(s) are located
+    targetRevision: master          # or HEAD
+    directory:
+      recurse: true                 # allows ArgoCD to deploy all YAML files under this folder
+
   destination:
-    server: "https://kubernetes.default.svc"
-    namespace: crossplane
+    server: https://kubernetes.default.svc
+    namespace: crossplane             # where Crossplane will be deployed
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true 
+      - CreateNamespace=true         # ArgoCD will create the namespace if it doesn't exist
