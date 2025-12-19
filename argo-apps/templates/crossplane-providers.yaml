@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-apis
+  name: crossplane-providers
   namespace: argocd   # ArgoCD always lives in its own namespace
 spec:
   project: default
 
   source:
     repoURL: https://github.com/mr26/platform-sre-devops-lab.git
-    path: mgmt-apps/platform-apis       # path in your repo where manifest(s) are located
+    path: mgmt-apps/crossplane-provider       # path in your repo where manifest(s) are located
     targetRevision: master          # or HEAD
     directory:
       recurse: true                 # allows ArgoCD to deploy all YAML files under this folder
