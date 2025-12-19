@@ -15,7 +15,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: crossplane-system          # where Atlantis will be deployed
+    namespace: crossplane          # where Atlantis will be deployed
 
   syncPolicy:
     automated:
