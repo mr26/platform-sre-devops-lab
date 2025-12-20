@@ -3,9 +3,6 @@ kind: ProviderConfig
 metadata:
   name: aws-provider-config
 spec:
-  packagePullPolicy: Always
-  revisionActivationPolicy: Automatic
-  revisionHistoryLimit: 1
   credentials:
     source: Secret
     secretRef:
