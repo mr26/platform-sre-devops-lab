@@ -12,6 +12,8 @@ spec:
     repoURL: https://github.com/mr26/platform-sre-devops-lab.git
     targetRevision: HEAD
     path: app-infra
+    directory:
+      recurse: true    
   destination:
     namespace: crossplane
     server: https://kubernetes.default.svc
