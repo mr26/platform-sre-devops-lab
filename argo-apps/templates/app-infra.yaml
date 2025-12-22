@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-app-infra
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mr26/platform-sre-devops-lab.git
+    targetRevision: HEAD
+    path: app-infra
+  destination:
+    namespace: crossplane
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true    

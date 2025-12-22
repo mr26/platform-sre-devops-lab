@@ -1,0 +1,12 @@
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: mehdi-sample-bucket
+  namespace: crossplane
+spec:
+  forProvider:
+    objectLockEnabled: true
+    region: us-east-1
+    tags:
+      Name: MehdiSampleBucket
+      Environment: Development
