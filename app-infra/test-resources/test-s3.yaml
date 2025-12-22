@@ -1,12 +1,15 @@
-apiVersion: s3.aws.m.upbound.io/v1beta1
+apiVersion: s3.aws.crossplane.io/v1beta1
 kind: Bucket
 metadata:
-  name: mehdi-sample-bucket
-  namespace: crossplane
+  name: mehdi-sample-bucket-123
 spec:
+  deletionPolicy: Delete
   forProvider:
-    objectLockEnabled: true
-    region: us-east-1
-    tags:
-      Name: MehdiSampleBucket
-      Environment: Development
+    locationConstraint: us-east-1
+    objectOwnership: BucketOwnerEnforced
+    paymentConfiguration:
+      payer: BucketOwner
+    versioningConfiguration:
+      status: Enabled
+  providerConfigRef:
+    name: aws-provider-config
