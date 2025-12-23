@@ -50,11 +50,11 @@ spec:
           containerPort: 4141
         resources:
           requests:
-            memory: 256Mi
-            cpu: 100m
+            memory: 512Mi
+            cpu: 200m
           limits:
-            memory: 256Mi
-            cpu: 100m
+            memory: 2Gi
+            cpu: 1
         livenessProbe:
           periodSeconds: 60
           httpGet:
