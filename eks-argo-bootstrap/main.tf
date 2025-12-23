@@ -37,12 +37,6 @@ resource "aws_eks_addon" "kube_proxy" {
   depends_on = [ aws_eks_node_group.mgmt_nodes ]
 }
 
-resource "aws_eks_addon" "cloudwatch_agent" {
-  cluster_name      = aws_eks_cluster.mgmt_cluster.name
-  addon_name        = "amazon-cloudwatch-observability"
-  depends_on = [ aws_eks_node_group.mgmt_nodes ]
-}
-
 resource "aws_eks_addon" "ebs_csi" {
   cluster_name             = aws_eks_cluster.mgmt_cluster.name
   addon_name               = "aws-ebs-csi-driver"
