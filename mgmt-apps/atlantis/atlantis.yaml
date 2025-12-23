@@ -38,7 +38,13 @@ spec:
             secretKeyRef:
               name: atlantis-github
               key: webhookSecret
-
+        - name: MY_PUBLIC_IP
+          valueFrom:
+            secretKeyRef:
+              name: my-public-ip-secret
+              key: ip
+        - name: TF_VAR_my_public_ip
+          value: "$(MY_PUBLIC_IP)"
         ports:
         - name: atlantis
           containerPort: 4141
