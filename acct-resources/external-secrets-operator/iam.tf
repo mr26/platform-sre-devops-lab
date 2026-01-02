@@ -1,4 +1,16 @@
-# IAM Role for IRSA
+# IAM policy for Secrets Manager access
+data "aws_iam_policy_document" "eso_policy" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret"
+    ]
+    resources = ["*"]
+  }
+}
+
+# IAM role for ServiceAccount (IRSA)
 resource "aws_iam_role" "eso_irsa_role" {
   name = "eso-irsa-role"
 
@@ -8,12 +20,12 @@ resource "aws_iam_role" "eso_irsa_role" {
       {
         Effect = "Allow",
         Principal = {
-          Federated = var.eks_oidc_provider
+          Federated = aws_iam_openid_connect_provider.eks_oidc.arn
         },
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "${replace(var.eks_oidc_provider, "https://", "")}:sub" = "system:serviceaccount:${var.namespace}:${var.service_account_name}"
+            "${replace(data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer, "https://", "")}:sub" = "system:serviceaccount:${var.namespace}:${var.service_account_name}"
           }
         }
       }

@@ -1,15 +1,15 @@
-variable "eks_oidc_provider" {
-  description = "OIDC provider URL for the EKS cluster"
-  default     = "https://oidc.eks.us-east-1.amazonaws.com/id/FC0D637E14CD3D170D44594D455232EA"
+variable "cluster_name" {
+  description = "EKS cluster name"
+  default     = "mgmt-cluster"
 }
 
 variable "namespace" {
-  description = "Namespace where ESO ServiceAccount will live"
+  description = "Kubernetes namespace of the service account"
   default     = "external-secrets"
 }
 
 variable "service_account_name" {
-  description = "ServiceAccount that ESO pods will use"
+  description = "Kubernetes service account name"
   default     = "external-secrets-sa"
 }
 
