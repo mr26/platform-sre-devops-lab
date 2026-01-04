@@ -16,9 +16,16 @@ spec:
   destination:
     server: https://kubernetes.default.svc
 
+  ignoreDifferences:
+    - group: external-secrets.io
+      kind: ClusterSecretStore
+      jsonPointers:
+        - /spec/provider/aws/auth/secretRef
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true         # ArgoCD will create the namespace if it doesn't exist
+      - RespectIgnoreDifferences=true

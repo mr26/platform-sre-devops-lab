@@ -18,12 +18,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: external-secrets
-  
-  ignoreDifferences:
-    - group: external-secrets.io
-      kind: ClusterSecretStore
-      jsonPointers:
-        - /spec/provider/aws/auth/secretRef
 
   syncPolicy:
     automated:
@@ -32,4 +26,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - SkipDryRunOnMissingResource=true
-      - RespectIgnoreDifferences=true
