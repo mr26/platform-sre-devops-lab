@@ -1,0 +1,25 @@
+apiVersion: cognitoidentityprovider.aws.crossplane.io/v1alpha1
+kind: UserPool
+metadata:
+  name: notes-userpool
+  namespace: default
+spec:
+  forProvider:
+    name: notes-userpool
+    # Configure basic settings as needed:
+    aliasAttributes:
+      - email
+    autoVerifiedAttributes:
+      - email
+    # Authentication flows allow USER_PASSWORD_AUTH
+    adminCreateUserConfig:
+      allowAdminCreateUserOnly: false
+    policies:
+      passwordPolicy:
+        minimumLength: 8
+        requireLowercase: true
+        requireNumbers: false
+        requireSymbols: false
+        requireUppercase: false
+  providerConfigRef:
+    name: aws-provider-config
