@@ -2,15 +2,19 @@ apiVersion: cognitoidentityprovider.aws.crossplane.io/v1alpha1
 kind: UserPoolClient
 metadata:
   name: notes-app-client
-  namespace: default
 spec:
   forProvider:
+    region: us-east-1
+
+    userPoolIdRef:
+      name: notes-userpool
+
     clientName: NotesAppPool
-    userPoolIDSelector:
-      matchControllerRef: true
+
     explicitAuthFlows:
       - ALLOW_USER_PASSWORD_AUTH
       - ALLOW_REFRESH_TOKEN_AUTH
+
     generateSecret: false
 
   providerConfigRef:
