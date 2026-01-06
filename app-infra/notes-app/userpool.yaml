@@ -5,21 +5,29 @@ metadata:
   namespace: default
 spec:
   forProvider:
-    name: notes-userpool
-    # Configure basic settings as needed:
+    # REQUIRED: name that will be used in AWS
+    poolName: notes-userpool
+
+    # REQUIRED: AWS region where the pool will be created
+    region: us-east-1
+
+    # Basic settings
     aliasAttributes:
       - email
     autoVerifiedAttributes:
       - email
-    # Authentication flows allow USER_PASSWORD_AUTH
-    adminCreateUserConfig:
-      allowAdminCreateUserOnly: false
+
+    # Example policy: allow email/password sign‑in
     policies:
       passwordPolicy:
         minimumLength: 8
         requireLowercase: true
+        requireUppercase: false
         requireNumbers: false
         requireSymbols: false
-        requireUppercase: false
+
+    adminCreateUserConfig:
+      allowAdminCreateUserOnly: false
+
   providerConfigRef:
-    name: aws-provider-config
+    name: aws-provider
