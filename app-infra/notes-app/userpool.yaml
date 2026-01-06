@@ -30,4 +30,4 @@ spec:
       allowAdminCreateUserOnly: false
 
   providerConfigRef:
-    name: aws-provider
+    name: aws-provider-config
