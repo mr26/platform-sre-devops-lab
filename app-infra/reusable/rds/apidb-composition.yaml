@@ -53,4 +53,13 @@ spec:
       patches:
         - fromFieldPath: spec.writeConnectionSecretToRef.name
           toFieldPath: spec.forProvider.name
-        - fromFieldPath: spec.writeConnectionSecretToRe
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
+          toFieldPath: metadata.namespace
+        - fromFieldPath: status.atProvider.endpoint
+          toFieldPath: spec.forProvider.secretStringTemplate.endpoint
+        - fromFieldPath: status.atProvider.port
+          toFieldPath: spec.forProvider.secretStringTemplate.port
+        - fromFieldPath: status.atProvider.masterUsername
+          toFieldPath: spec.forProvider.secretStringTemplate.username
+        - fromFieldPath: status.atProvider.masterPassword
+          toFieldPath: spec.forProvider.secretStringTemplate.password
