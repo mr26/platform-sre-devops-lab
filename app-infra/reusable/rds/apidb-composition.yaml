@@ -1,0 +1,65 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: apidb-composition
+spec:
+  compositeTypeRef:
+    apiVersion: platform.example.org/v1alpha1
+    kind: ApiDB
+  resources:
+    # ---------- RDS INSTANCE ----------
+    - name: rds
+      base:
+        apiVersion: database.aws.crossplane.io/v1beta1
+        kind: RDSInstance
+        spec:
+          forProvider:
+            dbInstanceClass: db.t3.micro
+            allocatedStorage: 20
+            engine: mysql
+            engineVersion: "8.0"
+            publiclyAccessible: false
+          writeConnectionSecretToRef:
+            name: placeholder-secret
+            namespace: placeholder-namespace
+          providerConfigRef:
+            name: aws-provider-config
+      patches:
+        - fromFieldPath: spec.namespace
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.writeConnectionSecretToRef.name
+
+    # ---------- AWS SECRETS MANAGER ----------
+    - name: aws-secret
+      base:
+        apiVersion: secretsmanager.aws.crossplane.io/v1beta1
+        kind: Secret
+        spec:
+          forProvider:
+            name: placeholder-secret
+            region: us-east-1
+            description: "Credentials for ApiDB"
+            secretStringTemplate: |
+              {
+                "username": "{{ .username }}",
+                "password": "{{ .password }}",
+                "endpoint": "{{ .endpoint }}",
+                "port": "{{ .port }}",
+                "dbname": "{{ .dbname }}"
+              }
+          providerConfigRef:
+            name: aws-provider-config
+      patches:
+        - fromFieldPath: spec.writeConnectionSecretToRef.name
+          toFieldPath: spec.forProvider.name
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
+          toFieldPath: metadata.namespace
+        - fromFieldPath: status.atProvider.endpoint
+          toFieldPath: spec.forProvider.secretStringTemplate.endpoint
+        - fromFieldPath: status.atProvider.port
+          toFieldPath: spec.forProvider.secretStringTemplate.port
+        - fromFieldPath: status.atProvider.masterUsername
+          toFieldPath: spec.forProvider.secretStringTemplate.username
+        - fromFieldPath: status.atProvider.masterPassword
+          toFieldPath: spec.forProvider.secretStringTemplate.password
