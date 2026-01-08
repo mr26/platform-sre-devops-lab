@@ -3,6 +3,7 @@ kind: Composition
 metadata:
   name: apidb-composition
 spec:
+  mode: "Standard"                    
   compositeTypeRef:
     apiVersion: platform.example.org/v1alpha1
     kind: ApiDB
@@ -21,15 +22,12 @@ spec:
             publiclyAccessible: false
             skipFinalSnapshot: true
           writeConnectionSecretToRef:
-            name: apidb-conn
-            namespace: default
+            name: placeholder-secret
+            namespace: placeholder-namespace
           providerConfigRef:
             name: aws-provider-config
       patches:
-        # User chooses namespace
         - fromFieldPath: spec.namespace
           toFieldPath: spec.writeConnectionSecretToRef.namespace
-
-        # Make secret name unique per XR
         - fromFieldPath: metadata.name
           toFieldPath: spec.writeConnectionSecretToRef.name
