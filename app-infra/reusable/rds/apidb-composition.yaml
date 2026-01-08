@@ -6,7 +6,7 @@ spec:
   compositeTypeRef:
     apiVersion: platform.example.org/v1alpha1
     kind: ApiDB
-  pipeline:
+  resources:
     - name: rds
       base:
         apiVersion: database.aws.crossplane.io/v1beta1
