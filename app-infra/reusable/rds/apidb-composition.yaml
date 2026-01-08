@@ -3,29 +3,33 @@ kind: Composition
 metadata:
   name: apidb-composition
 spec:
-  mode: "Standard"                    
   compositeTypeRef:
     apiVersion: platform.example.org/v1alpha1
     kind: ApiDB
-  resources:
-    - name: rds
-      base:
-        apiVersion: database.aws.crossplane.io/v1beta1
-        kind: RDSInstance
-        spec:
-          forProvider:
-            region: us-east-1
-            engine: mysql
-            engineVersion: "8.0"
-            dbInstanceClass: db.t3.micro
-            allocatedStorage: 20
-            publiclyAccessible: false
-            skipFinalSnapshot: true
-          writeConnectionSecretToRef:
-            name: placeholder-secret
-            namespace: placeholder-namespace
-          providerConfigRef:
-            name: aws-provider-config
+  mode: Pipeline                     
+  pipeline:
+    - name: createRDS
+      step: create
+      functionRef:
+        name: composite
+      args:
+        resource:
+          apiVersion: database.aws.crossplane.io/v1beta1
+          kind: RDSInstance
+          spec:
+            forProvider:
+              region: us-east-1
+              engine: mysql
+              engineVersion: "8.0"
+              dbInstanceClass: db.t3.micro
+              allocatedStorage: 20
+              publiclyAccessible: false
+              skipFinalSnapshot: true
+            writeConnectionSecretToRef:
+              name: placeholder-secret
+              namespace: placeholder-namespace
+            providerConfigRef:
+              name: aws-provider-config
       patches:
         - fromFieldPath: spec.namespace
           toFieldPath: spec.writeConnectionSecretToRef.namespace
