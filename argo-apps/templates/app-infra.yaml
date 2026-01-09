@@ -22,3 +22,10 @@ spec:
       prune: true  
     syncOptions:
       - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    # Ignore Crossplane Composition server-managed fields
+    - group: apiextensions.crossplane.io
+      kind: Composition
+      jsonPointers:
+        - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
+        - /metadata/managedFields
