@@ -29,3 +29,5 @@ spec:
       jsonPointers:
         - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
         - /metadata/managedFields
+        - /spec/pipeline
+
