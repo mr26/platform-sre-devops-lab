@@ -1,0 +1,14 @@
+# 1️⃣ Namespace creation
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: notes-app
+---
+# 2️⃣ ApiDB claim
+apiVersion: platform.example.org/v1alpha1
+kind: ApiDB
+metadata:
+  name: my-notes-db
+  namespace: notes-app   # namespace where the secret will be created
+spec:
+  namespace: notes-app   # patched into writeConnectionSecretToRef.namespace
