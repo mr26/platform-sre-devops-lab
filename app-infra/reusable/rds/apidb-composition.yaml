@@ -6,32 +6,35 @@ spec:
   compositeTypeRef:
     apiVersion: platform.example.org/v1alpha1
     kind: ApiDB
-  mode: Pipeline                     
+  mode: Pipeline
   pipeline:
-    - name: createRDS
-      step: create
+    - step: patch-and-transform
       functionRef:
-        name: function-patch-and-transform 
-      args:
-        resource:
-          apiVersion: database.aws.crossplane.io/v1beta1
-          kind: RDSInstance
-          spec:
-            forProvider:
-              region: us-east-1
-              engine: mysql
-              engineVersion: "8.0"
-              dbInstanceClass: db.t3.micro
-              allocatedStorage: 20
-              publiclyAccessible: false
-              skipFinalSnapshot: true
-            writeConnectionSecretToRef:
-              name: placeholder-secret
-              namespace: placeholder-namespace
-            providerConfigRef:
-              name: aws-provider-config
-      patches:
-        - fromFieldPath: spec.namespace
-          toFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.writeConnectionSecretToRef.name
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: rdsinstance
+            base:
+              apiVersion: database.aws.crossplane.io/v1beta1
+              kind: RDSInstance
+              spec:
+                forProvider:
+                  region: us-east-1
+                  engine: mysql
+                  engineVersion: "8.0"
+                  dbInstanceClass: db.t3.micro
+                  allocatedStorage: 20
+                  publiclyAccessible: false
+                  skipFinalSnapshot: true
+                writeConnectionSecretToRef:
+                  name: placeholder-secret
+                  namespace: placeholder-namespace
+                providerConfigRef:
+                  name: aws-provider-config
+            patches:
+              - fromFieldPath: spec.namespace
+                toFieldPath: spec.writeConnectionSecretToRef.namespace
+              - fromFieldPath: metadata.name
+                toFieldPath: spec.writeConnectionSecretToRef.name
