@@ -3,51 +3,35 @@ kind: Composition
 metadata:
   name: apidb-composition
 spec:
-  writeConnectionSecretsToNamespace: placeholder-namespace # default namespace, will be patched
   compositeTypeRef:
     apiVersion: platform.example.org/v1alpha1
     kind: ApiDB
-  resources:
-    - name: rdsinstance
-      base:
-        apiVersion: database.aws.crossplane.io/v1beta1
-        kind: RDSInstance
-        spec:
-          forProvider:
-            region: us-east-1
-            engine: mysql
-            engineVersion: "8.0"
-            dbInstanceClass: db.t3.micro
-            allocatedStorage: 20
-            publiclyAccessible: false
-            skipFinalSnapshot: true
-            username: adminuser
-            autoGeneratePassword: true
-            passwordSecretRef:
+  mode: Pipeline                     
+  pipeline:
+    - name: createRDS
+      step: create
+      functionRef:
+        name: function-patch-and-transform 
+      args:
+        resource:
+          apiVersion: database.aws.crossplane.io/v1beta1
+          kind: RDSInstance
+          spec:
+            forProvider:
+              region: us-east-1
+              engine: mysql
+              engineVersion: "8.0"
+              dbInstanceClass: db.t3.micro
+              allocatedStorage: 20
+              publiclyAccessible: false
+              skipFinalSnapshot: true
+            writeConnectionSecretToRef:
+              name: placeholder-secret
               namespace: placeholder-namespace
-              key: password
-          writeConnectionSecretToRef:
-            namespace: placeholder-namespace
+            providerConfigRef:
+              name: aws-provider-config
       patches:
-        # patch secret namespace from claim
         - fromFieldPath: spec.namespace
           toFieldPath: spec.writeConnectionSecretToRef.namespace
-        # patch secret name from claim metadata
         - fromFieldPath: metadata.name
           toFieldPath: spec.writeConnectionSecretToRef.name
-        # patch password secret name
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.forProvider.passwordSecretRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-input"
-      connectionDetails:
-        - fromFieldPath: "status.atProvider.endpoint"
-          name: endpoint
-        - fromFieldPath: "status.atProvider.address"
-          name: host
-        - fromFieldPath: "spec.forProvider.username"
-          name: username
-        - fromConnectionSecretKey: "attribute.password"
-          name: password
