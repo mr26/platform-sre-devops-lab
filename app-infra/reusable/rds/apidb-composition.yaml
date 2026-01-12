@@ -37,3 +37,9 @@ spec:
                 toFieldPath: spec.writeConnectionSecretToRef.namespace
               - fromFieldPath: metadata.name
                 toFieldPath: spec.writeConnectionSecretToRef.name
+              - fromFieldPath: kind
+                toFieldPath: metadata.namespace
+                transforms:
+                  - type: map
+                    map:
+                      CompositeRDSInstance: some-namespace
