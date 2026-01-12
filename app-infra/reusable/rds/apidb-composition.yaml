@@ -11,7 +11,7 @@ spec:
     - name: createRDS
       step: create
       functionRef:
-        name: composite
+        name: function-patch-and-transform
       args:
         resource:
           apiVersion: database.aws.crossplane.io/v1beta1
