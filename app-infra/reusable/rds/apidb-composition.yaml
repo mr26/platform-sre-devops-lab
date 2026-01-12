@@ -34,7 +34,7 @@ spec:
                 providerConfigRef:
                   name: aws-provider-config
             patches:
-              - fromFieldPath: spec.namespace
+              - fromFieldPath: spec.targetNamespace
                 toFieldPath: spec.writeConnectionSecretToRef.namespace
               - fromFieldPath: metadata.name
                 toFieldPath: spec.writeConnectionSecretToRef.name
