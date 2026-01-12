@@ -10,4 +10,4 @@ kind: ApiDB
 metadata:
   name: my-notes-db
 spec:
-  namespace: notes-app   # patched into writeConnectionSecretToRef.namespace
+  targetNamespace: notes-app   # patched into writeConnectionSecretToRef.namespace
