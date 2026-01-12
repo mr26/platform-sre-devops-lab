@@ -7,6 +7,9 @@ spec:
   names:
     kind: ApiDB
     plural: apidbs
+  claimNames:
+    kind: ApiDBClaim
+    plural: apidbclaims
   versions:
     - name: v1alpha1
       served: true
@@ -15,9 +18,10 @@ spec:
         openAPIV3Schema:
           type: object
           properties:
-            spec:
+            parameters:
               type: object
               properties:
-                secretName:
+                dbName:
                   type: string
-                  description: "Name of the K8s secret to store the connection details"
+              required:
+                - dbName

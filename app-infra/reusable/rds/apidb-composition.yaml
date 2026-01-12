@@ -15,11 +15,12 @@ spec:
         apiVersion: pt.fn.crossplane.io/v1beta1
         kind: Resources
         resources:
+          - name: api-rds-db
             base:
               apiVersion: database.aws.crossplane.io/v1beta1
               kind: RDSInstance
               metadata:
-                name: rds-api-db
+                name: api-rds-db
               spec:
                 forProvider:
                   region: us-east-1
@@ -27,13 +28,30 @@ spec:
                   engineVersion: "8.0"
                   dbInstanceClass: db.t3.micro
                   allocatedStorage: 20
+                  dbName: "example"
+                  username: "admin"
+                  passwordSecretRef:
+                    name: example-db-instance
+                    namespace: default
+                    key: password
                   publiclyAccessible: false
                   skipFinalSnapshot: true
                 writeConnectionSecretToRef:
                   name: connection-details
-                  namespace: crossplane
+                  namespace: default
                 providerConfigRef:
                   name: aws-provider-config
             patches:
-              - fromFieldPath: "spec.secretName"
-                toFieldPath: "spec.writeConnectionSecretToRef.name"
+               - fromFieldPath: "spec.parameters.dbName"
+                 toFieldPath: "spec.forProvider.dbName"
+                 type: FromCompositeFieldPath
+                 policy:
+                  fromFieldPath: Required
+               - type: CombineFromComposite
+                 combine:
+                   variables:
+                     - fromFieldPath: spec.parameters.dbName
+                   strategy: string
+                   string:
+                    fmt: "%s-connection-string"
+                 toFieldPath: spec.writeConnectionSecretToRef.name
