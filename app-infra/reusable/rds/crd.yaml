@@ -3,6 +3,7 @@ kind: CompositeResourceDefinition
 metadata:
   name: apidbs.platform.example.org
 spec:
+  scope: Cluster
   group: platform.example.org
   names:
     kind: ApiDB
