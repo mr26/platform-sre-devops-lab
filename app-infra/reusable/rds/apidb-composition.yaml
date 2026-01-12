@@ -42,4 +42,4 @@ spec:
                 transforms:
                   - type: map
                     map:
-                      CompositeRDSInstance: some-namespace
+                      ApiDB: some-namespace
