@@ -18,8 +18,6 @@ spec:
             base:
               apiVersion: database.aws.crossplane.io/v1beta1
               kind: RDSInstance
-              metadata:
-                name: rds-api-db
               spec:
                 forProvider:
                   region: us-east-1
