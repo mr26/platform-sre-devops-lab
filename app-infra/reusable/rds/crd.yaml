@@ -8,9 +8,6 @@ spec:
   names:
     kind: ApiDB
     plural: apidbs
-  claimNames:
-    kind: ApiDBClaim
-    plural: apidbclaims
   versions:
     - name: v1alpha1
       served: true
