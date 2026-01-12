@@ -18,6 +18,8 @@ spec:
             base:
               apiVersion: database.aws.crossplane.io/v1beta1
               kind: RDSInstance
+              metadata:
+                name: rds-api-db
               spec:
                 forProvider:
                   region: us-east-1
@@ -35,3 +37,5 @@ spec:
             patches:
               - fromFieldPath: "spec.targetNamespace"
                 toFieldPath: "spec.writeConnectionSecretToRef.namespace"
+              - fromFieldPath: "spec.targetNamespace"
+                toFieldPath: "metadata.namespace"
