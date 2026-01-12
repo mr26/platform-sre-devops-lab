@@ -15,7 +15,6 @@ spec:
         apiVersion: pt.fn.crossplane.io/v1beta1
         kind: Resources
         resources:
-          - name: rdsinstance
             base:
               apiVersion: database.aws.crossplane.io/v1beta1
               kind: RDSInstance
@@ -34,8 +33,6 @@ spec:
                 providerConfigRef:
                   name: aws-provider-config
             patches:
-              - fromFieldPath: kind
-                toFieldPath: metadata.namespace
               - fromFieldPath: spec.targetNamespace
                 toFieldPath: spec.writeConnectionSecretToRef.namespace
               - fromFieldPath: metadata.name
