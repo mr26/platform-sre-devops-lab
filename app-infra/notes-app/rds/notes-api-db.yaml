@@ -2,7 +2,6 @@ apiVersion: platform.example.org/v1alpha1
 kind: ApiDB
 metadata:
   name: my-notes-db
-  namespace: default
 spec:
   parameters:
     dbName: "notes-app-db"          # Name of the database
