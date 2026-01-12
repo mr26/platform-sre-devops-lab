@@ -31,11 +31,9 @@ spec:
                   skipFinalSnapshot: true
                 writeConnectionSecretToRef:
                   name: connection-details
-                  namespace: placeholder-namespace
+                  namespace: crossplane
                 providerConfigRef:
                   name: aws-provider-config
             patches:
-              - fromFieldPath: "spec.targetNamespace"
-                toFieldPath: "spec.writeConnectionSecretToRef.namespace"
-              - fromFieldPath: "spec.targetNamespace"
-                toFieldPath: "metadata.namespace"
+              - fromFieldPath: "spec.secretName"
+                toFieldPath: "spec.writeConnectionSecretToRef.name"

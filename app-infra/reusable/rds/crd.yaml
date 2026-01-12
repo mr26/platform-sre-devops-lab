@@ -18,6 +18,6 @@ spec:
             spec:
               type: object
               properties:
-                targetNamespace:
+                secretName:
                   type: string
-                  description: "Namespace where K8s secret will be stored"
+                  description: "Name of the K8s secret to store the connection details"

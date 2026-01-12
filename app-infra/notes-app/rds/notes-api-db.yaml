@@ -9,6 +9,5 @@ apiVersion: platform.example.org/v1alpha1
 kind: ApiDB
 metadata:
   name: my-notes-db
-  namespace: notes-app
 spec:
-  targetNamespace: notes-app   # patched into writeConnectionSecretToRef.namespace
+  secretName: notes-api-db-connection-details
