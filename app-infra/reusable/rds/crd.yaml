@@ -16,10 +16,13 @@ spec:
         openAPIV3Schema:
           type: object
           properties:
-            parameters:
+            spec:                         # <--- MUST have spec here
               type: object
               properties:
-                dbName:
-                  type: string
-              required:
-                - dbName
+                parameters:
+                  type: object
+                  properties:
+                    dbName:
+                      type: string
+                  required:
+                    - dbName
