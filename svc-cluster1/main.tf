@@ -33,7 +33,7 @@ resource "aws_eks_node_group" "svc_cluster1_nodes" {
   subnet_ids      = var.private_subnet_ids
 
   ami_type        = "AL2_ARM_64"
-  instance_types  = ["t4g.micro"]
+  instance_types  = ["t4g.medium"]
 
   scaling_config {
     desired_size = 1
