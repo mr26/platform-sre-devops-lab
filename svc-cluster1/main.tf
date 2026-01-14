@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 ##################################
 # EKS Cluster
-##################################
+################################## 
 
 resource "aws_eks_cluster" "svc_cluster1" {
   name = "svc-cluster1"
