@@ -10,7 +10,7 @@ resource "random_password" "db" {
 # AWS Secrets Manager secret
 ############################
 resource "aws_secretsmanager_secret" "db" {
-  name = "${var.db_name}-credentials"
+  name = "${var.db_name}-creds"
 }
 
 resource "aws_secretsmanager_secret_version" "db" {
