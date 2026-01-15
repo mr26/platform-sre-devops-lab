@@ -32,8 +32,7 @@ resource "aws_eks_node_group" "svc_cluster1_nodes" {
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = var.private_subnet_ids
 
-  ami_type       = "AL2_x86_64"
-  instance_types = ["t3.medium"] 
+  instance_types = ["t4g.medium"] 
 
   scaling_config {
     desired_size = 1
