@@ -47,7 +47,7 @@ resource "aws_eks_node_group" "svc_cluster1_nodes" {
 }
 
 ##################################
-# EKS Addons
+# EKS Addons (now wait for nodes)
 ##################################
 
 resource "aws_eks_addon" "vpc_cni" {
@@ -55,7 +55,7 @@ resource "aws_eks_addon" "vpc_cni" {
   addon_name   = "vpc-cni"
 
   depends_on = [
-    aws_eks_cluster.svc_cluster1
+    aws_eks_node_group.svc_cluster1_nodes
   ]
 }
 
@@ -64,7 +64,7 @@ resource "aws_eks_addon" "coredns" {
   addon_name   = "coredns"
 
   depends_on = [
-    aws_eks_cluster.svc_cluster1
+    aws_eks_node_group.svc_cluster1_nodes
   ]
 }
 
@@ -73,7 +73,7 @@ resource "aws_eks_addon" "kube_proxy" {
   addon_name   = "kube-proxy"
 
   depends_on = [
-    aws_eks_cluster.svc_cluster1
+    aws_eks_node_group.svc_cluster1_nodes
   ]
 }
 
@@ -82,7 +82,7 @@ resource "aws_eks_addon" "ebs_csi" {
   addon_name   = "aws-ebs-csi-driver"
 
   depends_on = [
-    aws_eks_cluster.svc_cluster1
+    aws_eks_node_group.svc_cluster1_nodes
   ]
 }
 
