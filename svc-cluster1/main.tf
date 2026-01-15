@@ -102,5 +102,5 @@ resource "aws_eks_access_policy_association" "admin_policy1" {
 
   access_scope {
     type = "cluster"
-  }
+  } 
 }
