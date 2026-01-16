@@ -1,0 +1,13 @@
+aws_region              = "us-east-1"
+vpc_id                  = "vpc-0df13ab5c2a1d8f36"
+private_subnet_ids      = ["subnet-0ea4f9d43e57530ed", "subnet-0710690d90c6d77ff"]
+allowed_cidr_blocks     = ["10.0.0.0/16"]   # e.g., your EKS pod network
+db_name                 = "notes-app-db"
+initial_db_name         = "notes"
+db_username             = "admin"
+engine                  = "mysql"
+engine_version          = "8.0"
+instance_class          = "db.t3.micro"
+allocated_storage       = 20
+multi_az                = false
+db_port                 = 3306
