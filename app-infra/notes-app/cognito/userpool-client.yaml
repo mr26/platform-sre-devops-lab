@@ -15,7 +15,7 @@ spec:
       - ALLOW_USER_PASSWORD_AUTH
       - ALLOW_REFRESH_TOKEN_AUTH
 
-    generateSecret: false
+    generateSecret: true
 
   providerConfigRef:
     name: aws-provider-config
