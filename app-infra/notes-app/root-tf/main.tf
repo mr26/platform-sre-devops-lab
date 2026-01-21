@@ -1,5 +1,5 @@
 module "rds" {
-  source = "./rds"
+  source = "../rds"
   aws_region = var.aws_region
   vpc_id = var.vpc_id
   private_subnet_ids = var.private_subnet_ids
@@ -16,7 +16,7 @@ module "rds" {
 }
 
 module "iam" {
-  source = "./iam"
+  source = "../iam"
   cluster_name = var.cluster_name
   namespace = var.namespace
   service_account_name = var.service_account_name
