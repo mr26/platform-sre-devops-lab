@@ -108,7 +108,7 @@ resource "aws_iam_policy" "app_policy" {
         Action = [
           "rds-db:connect"
         ]
-        Resource = "arn:aws:rds-db:${var.region}:${data.aws_caller_identity.current.account_id}:dbuser:${data.terraform_remote_state.rds.outputs.db_resource_id}/${var.db_username}"
+        Resource = "arn:aws:rds-db:${var.region}:${data.aws_caller_identity.current.account_id}:dbuser:${var.db_resource_id}/${var.db_username}"
       },
 
       ############################

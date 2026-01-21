@@ -1,3 +1,21 @@
+data "terraform_remote_state" "rds" {
+  backend = "s3"
+  config = {
+    bucket = "mehdi-platform-tf-state"
+    key    = "notes-app-db/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config = {
+    bucket = "mehdi-platform-tf-state"
+    key    = "notes-app-iam/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 module "rds" {
   source = "./rds"
   aws_region = module.rds.aws_region
@@ -18,4 +36,6 @@ module "iam" {
   tf_state_bucket = module.iam.tf_state_bucket
   rds_state_key = module.iam.rds_state_key
   db_username = module.iam.db_username
+  db_resource_id   = module.rds.db_resource_id
+
 }

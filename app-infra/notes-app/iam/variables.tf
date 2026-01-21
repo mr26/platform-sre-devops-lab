@@ -45,3 +45,8 @@ variable "db_username" {
   description = "Database username for IAM DB authentication"
   type        = string
 }
+
+variable "db_resource_id" {
+  description = "Resource ID for IAM DB authentication"
+  type        = string
+}
