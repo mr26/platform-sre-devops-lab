@@ -107,22 +107,6 @@ variable "iam_role_name" {
   description = "IAM role name for IRSA"
   type        = string
 }
-
-variable "region" {
-  description = "AWS region"
-  type        = string
-}
-
 ############################
 # RDS
 ############################
-
-variable "db_username" {
-  description = "Database username for IAM DB authentication"
-  type        = string
-}
-
-variable "db_resource_id" {
-  description = "Resource ID for IAM DB authentication"
-  type        = string
-}

@@ -6,6 +6,13 @@ module "rds" {
   initial_db_name = var.initial_db_name
   db_username = var.db_username
   db_name = var.db_name
+  allowed_cidr_blocks = var.allowed_cidr_blocks
+  engine = var.engine
+  engine_version = var.engine_version
+  instance_class = var.instance_class
+  allocated_storage = var.allocated_storage
+  multi_az = var.multi_az
+  db_port = var.db_port
 }
 
 module "iam" {
@@ -14,7 +21,7 @@ module "iam" {
   namespace = var.namespace
   service_account_name = var.service_account_name
   iam_role_name = var.iam_role_name
-  region = var.region
+  aws_region = var.aws_region
   db_username = var.db_username
   db_resource_id   = module.rds.db_resource_id
 }

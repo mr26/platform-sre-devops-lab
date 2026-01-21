@@ -22,7 +22,7 @@ variable "iam_role_name" {
   type        = string
 }
 
-variable "region" {
+variable "aws_region" {
   description = "AWS region"
   type        = string
 }
