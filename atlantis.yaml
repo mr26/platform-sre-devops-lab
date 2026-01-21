@@ -1,0 +1,13 @@
+version: 3
+projects:
+  - name: notes-app
+    dir: app-infra/notes-app
+    workspace: default
+    terraform_version: v1.5.0
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - "*.tfvars"
+        - "**/*.tf"
+      enabled: true
+
