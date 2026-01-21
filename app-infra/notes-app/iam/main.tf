@@ -12,21 +12,6 @@ data "aws_iam_openid_connect_provider" "this" {
 
 data "aws_caller_identity" "current" {}
 
-
-############################
-# Remote state for RDS outputs
-############################
-
-data "terraform_remote_state" "rds" {
-  backend = "s3"
-
-  config = {
-    bucket = var.tf_state_bucket
-    key    = var.rds_state_key
-    region = var.region
-  }
-}
-
 ############################
 # IAM Role for IRSA
 ############################

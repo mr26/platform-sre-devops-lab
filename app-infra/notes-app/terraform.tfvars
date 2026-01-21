@@ -11,3 +11,12 @@ instance_class          = "db.t3.micro"
 allocated_storage       = 20
 multi_az                = false
 db_port                 = 3306
+############################
+# EKS cluster info
+############################
+
+cluster_name         = "mgmt-cluster"
+namespace            = "notes-app"
+service_account_name = "notes-app-sa"
+iam_role_name        = "notes-app-irsa-role"
+region               = "us-east-1"

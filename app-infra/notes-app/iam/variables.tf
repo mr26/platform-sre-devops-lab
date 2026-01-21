@@ -31,16 +31,6 @@ variable "region" {
 # RDS
 ############################
 
-variable "tf_state_bucket" {
-  description = "S3 bucket storing the Terraform state for RDS module"
-  type        = string
-}
-
-variable "rds_state_key" {
-  description = "S3 key for the RDS Terraform state file"
-  type        = string
-}
-
 variable "db_username" {
   description = "Database username for IAM DB authentication"
   type        = string
