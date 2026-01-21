@@ -10,6 +10,12 @@ module "rds" {
 
 module "iam" {
   source = "./iam"
-  cognito_secret_arn = module.iam.secret_arn
-  cognito_user_pool_arn = module.iam.user_pool_arn
+  cluster_name = module.iam.cluster_name
+  namespace = module.iam.namespace
+  service_account_name = module.iam.service_account_name
+  iam_role_name = module.iam.iam_role_name
+  region = module.iam.region
+  tf_state_bucket = module.iam.tf_state_bucket
+  rds_state_key = module.iam.rds_state_key
+  db_username = module.iam.db_username
 }
