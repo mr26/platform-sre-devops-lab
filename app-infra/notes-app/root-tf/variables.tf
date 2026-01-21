@@ -2,6 +2,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
+  default     = "us-east-1" 
 }
 
 # Existing VPC ID
@@ -82,3 +83,30 @@ variable "db_port" {
   type        = number
   default     = 3306
 }
+
+############################
+# EKS cluster info
+############################
+
+variable "cluster_name" {
+  description = "EKS cluster name"
+  type        = string
+}
+
+variable "namespace" {
+  description = "Kubernetes namespace where the ServiceAccount exists"
+  type        = string
+}
+
+variable "service_account_name" {
+  description = "Kubernetes ServiceAccount name for IRSA"
+  type        = string
+}
+
+variable "iam_role_name" {
+  description = "IAM role name for IRSA"
+  type        = string
+}
+############################
+# RDS
+############################
