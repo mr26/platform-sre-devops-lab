@@ -82,3 +82,7 @@ variable "db_port" {
   type        = number
   default     = 3306
 }
+output "db_resource_id" {
+  value = aws_db_instance.this.resource_id
+  description = "Resource ID used for IAM DB authentication"
+}
