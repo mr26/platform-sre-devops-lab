@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: auth-gateway
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: auth
+  
+  # Multiple sources - chart + private values
+  sources:
+    # Source 1: Helm chart from your main repo
+    - repoURL: https://github.com/mr26/notes-auth-service.git
+      targetRevision: main
+      path: auth-gateway/helm
+      helm:
+        valueFiles:
+          - values.yaml                          # base values from chart
+          - $values/auth-gateway/values.yaml     # private values
+
+    # Source 2: Private config repo (aliased as "values")
+    - repoURL: https://github.com/mr26/private-config
+      targetRevision: main
+      ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
