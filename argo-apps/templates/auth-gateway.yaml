@@ -21,7 +21,7 @@ spec:
           - $values/auth-gateway/values.yaml     # private values
 
     # Source 2: Private config repo (aliased as "values")
-    - repoURL: https://github.com/mr26/private-config
+    - repoURL: https://github.com/mr26/private-config.git
       targetRevision: main
       ref: values
 
