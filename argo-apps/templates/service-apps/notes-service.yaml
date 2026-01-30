@@ -1,0 +1,35 @@
+# Updated notes-service Argo CD Application with Istio sidecar injection
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-release1
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"  # Deploy after Istio is ready
+spec:
+  project: default
+  sources:
+    # Private config repo for sensitive values
+    - repoURL: https://github.com/mr26/private-config.git
+      targetRevision: main
+      ref: values
+    # Main repo with Helm chart
+    - repoURL: https://github.com/mr26/notes-auth-service.git
+      targetRevision: main
+      path: notes-service/helm
+      helm:
+        valueFiles:
+          - $values/notes-service/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: notes
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
+
