@@ -1,0 +1,11 @@
+# Enforce STRICT mTLS cluster-wide
+# All mesh services must use mTLS for pod-to-pod communication
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  mtls:
+    mode: STRICT
+
