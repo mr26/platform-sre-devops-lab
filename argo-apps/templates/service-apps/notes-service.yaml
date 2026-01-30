@@ -10,7 +10,7 @@ spec:
   project: default
   sources:
     # Private config repo for sensitive values
-    - repoURL: https://github.com/mr26/private-config.git
+    - repoURL: git@github.com:mr26/private-config.git
       targetRevision: main
       ref: values
     # Main repo with Helm chart
