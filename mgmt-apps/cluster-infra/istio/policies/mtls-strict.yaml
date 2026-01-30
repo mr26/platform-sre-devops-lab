@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.28.0/_definitions.json
 # Enforce STRICT mTLS cluster-wide
 # All mesh services must use mTLS for pod-to-pod communication
 apiVersion: security.istio.io/v1beta1
