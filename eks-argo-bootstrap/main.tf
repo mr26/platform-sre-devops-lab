@@ -52,9 +52,9 @@ resource "aws_eks_node_group" "mgmt_nodes" {
   instance_types = ["t4g.medium"]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 2
-    min_size     = 2
+    desired_size = 3
+    max_size     = 3
+    min_size     = 3
   }
 }
 
